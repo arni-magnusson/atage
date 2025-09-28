@@ -1,8 +1,10 @@
 # Extract results of interest, write CSV output tables
 
-# Before: bet_f.csv, bet_n.csv,
+# Before: alb_f.csv, alb_n.csv,
+#         bet_f.csv, bet_n.csv,
 #         yft_f.csv, yft_n.csv (model)
-# After:  bet_f.csv, bet_n.csv,
+# After:  alb_f.csv, alb_n.csv,
+#         bet_f.csv, bet_n.csv,
 #         yft_f.csv, yft_n.csv (output)
 
 library(TAF)

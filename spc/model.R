@@ -1,8 +1,10 @@
 # Run analysis, write model results
 
-# Before: bet_f.csv, bet_n.csv,
+# Before: alb_f.csv, alb_n.csv,
+#         bet_f.csv, bet_n.csv,
 #         yft_f.csv, yft_n.csv (data)
-# After:  bet_f.csv, bet_n.csv,
+# After:  alb_f.csv, alb_n.csv,
+#         bet_f.csv, bet_n.csv,
 #         yft_f.csv, yft_n.csv (model)
 
 library(TAF)
@@ -10,10 +12,18 @@ library(TAF)
 mkdir("model")
 
 # Read tables
+alb.f <- read.taf("data/alb_f.csv")
+alb.n <- read.taf("data/alb_n.csv")
 bet.f <- read.taf("data/bet_f.csv")
 bet.n <- read.taf("data/bet_n.csv")
 yft.f <- read.taf("data/yft_f.csv")
 yft.n <- read.taf("data/yft_n.csv")
+
+# Aggregate ALB
+alb.f <- alb.f[alb.f$area == "all",]
+alb.f <- alb.f[order(alb.f$age, alb.f$year), c("year", "age", "f")]
+alb.n <- aggregate(n~year+age, alb.n, sum)  # sum areas
+alb.n$n <- alb.n$n / 1e6
 
 # Aggregate BET
 bet.f$age <- ceiling(bet.f$age / 4)
@@ -34,6 +44,8 @@ yft.n <- aggregate(n~year+age, yft.n, mean)  # avg across seasons
 yft.n$n <- yft.n$n / 1e6
 
 # Write tables
+write.taf(alb.f, dir="model")
+write.taf(alb.n, dir="model")
 write.taf(bet.f, dir="model")
 write.taf(bet.n, dir="model")
 write.taf(yft.f, dir="model")

@@ -1,8 +1,10 @@
 # Produce plots and tables for report
 
-# Before: bet_f.csv, bet_n.csv,
+# Before: alb_f.csv, alb_n.csv,
+#         bet_f.csv, bet_n.csv,
 #         yft_f.csv, yft_n.csv (output)
-# After:  bet_f.csv, bet_n.csv,
+# After:  alb_f.csv, alb_n.csv,
+#         bet_f.csv, bet_n.csv,
 #         yft_f.csv, yft_n.csv (report)
 
 library(TAF)
@@ -10,10 +12,18 @@ library(TAF)
 mkdir("report")
 
 # Read tables
+alb.f <- read.taf("output/alb_f.csv")
+alb.n <- read.taf("output/alb_n.csv")
 bet.f <- read.taf("output/bet_f.csv")
 bet.n <- read.taf("output/bet_n.csv")
 yft.f <- read.taf("output/yft_f.csv")
 yft.n <- read.taf("output/yft_n.csv")
+
+# Format ALB
+alb.f$f <- round(alb.f$f, 2)
+alb.n$n <- round(alb.n$n)
+alb.f <- format(long2taf(alb.f))  # retain trailing zeros
+alb.n <- long2taf(alb.n)
 
 # Format BET
 bet.f$f <- round(bet.f$f, 2)
@@ -28,6 +38,8 @@ yft.f <- format(long2taf(yft.f))  # retain trailing zeros
 yft.n <- long2taf(yft.n)
 
 # Write tables
+write.taf(alb.f, dir="report")
+write.taf(alb.n, dir="report")
 write.taf(bet.f, dir="report")
 write.taf(bet.n, dir="report")
 write.taf(yft.f, dir="report")
