@@ -27,6 +27,8 @@ f <- read.csv("yft_2023_fatage.csv")
 ################################################################################
 
 f <- f[f$area == "all",]
+f <- aggregate(f~year+age, f, sum)
 f$area <- NULL
 
-n <- aggregate(n~year+season+age, n, length)
+n <- aggregate(n~year+age, n, sum)
+n$n <- n$n / 1e6
