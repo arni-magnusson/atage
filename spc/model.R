@@ -1,27 +1,27 @@
 # Run analysis, write model results
 
-# Before: f.csv, n.csv (data)
-# After:  f.csv, n.csv (model)
+# Before: yft_f.csv, yft_n.csv (data)
+# After:  yft_f.csv, yft_n.csv (model)
 
 library(TAF)
 
 mkdir("model")
 
 # Read tables
-f <- read.taf("data/f.csv")
-n <- read.taf("data/n.csv")
+yft.f <- read.taf("data/yft_f.csv")
+yft.n <- read.taf("data/yft_n.csv")
 
 # Aggregate F
-f$age <- ceiling(f$age / 4)
-f <- f[f$area == "all",]
-f <- aggregate(f~year+age, f, mean)  # avg within each age
+yft.f$age <- ceiling(yft.f$age / 4)
+yft.f <- yft.f[yft.f$area == "all",]
+yft.f <- aggregate(f~year+age, yft.f, mean)  # avg within each age
 
 # Aggregate N
-n$age <- ceiling(n$age / 4)
-n <- aggregate(n~year+age+season, n, sum)  # sum across areas and within age
-n <- aggregate(n~year+age, n, mean)  # avg across seasons
-n$n <- n$n / 1e6
+yft.n$age <- ceiling(yft.n$age / 4)
+yft.n <- aggregate(n~year+age+season, yft.n, sum)  # sum areas and within age
+yft.n <- aggregate(n~year+age, yft.n, mean)  # avg across seasons
+yft.n$n <- yft.n$n / 1e6
 
 # Write tables
-write.taf(f, dir="model")
-write.taf(n, dir="model")
+write.taf(yft.f, dir="model")
+write.taf(yft.n, dir="model")

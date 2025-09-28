@@ -1,22 +1,22 @@
 # Produce plots and tables for report
 
-# Before: f.csv, n.csv (output)
-# After:  f.csv, n.csv (report)
+# Before: yft_f.csv, yft_n.csv (output)
+# After:  yft_f.csv, yft_n.csv (report)
 
 library(TAF)
 
 mkdir("report")
 
 # Read tables
-f <- read.taf("output/f.csv")
-n <- read.taf("output/n.csv")
+yft.f <- read.taf("output/yft_f.csv")
+yft.n <- read.taf("output/yft_n.csv")
 
 # Format tables
-f$f <- round(f$f, 2)
-n$n <- round(n$n)
-f <- format(long2taf(f))  # retain trailing zeros
-n <- long2taf(n)
+yft.f$f <- round(yft.f$f, 2)
+yft.n$n <- round(yft.n$n)
+yft.f <- format(long2taf(yft.f))  # retain trailing zeros
+yft.n <- long2taf(yft.n)
 
 # Write tables
-write.taf(f, dir="report")
-write.taf(n, dir="report")
+write.taf(yft.f, dir="report")
+write.taf(yft.n, dir="report")
