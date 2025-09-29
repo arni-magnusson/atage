@@ -2,11 +2,13 @@
 
 # Before: alb_f.csv, alb_n.csv,
 #         bet_f.csv, bet_n.csv,
+#         ocs_f.csv, ocs_n.csv,
 #         skj_f.csv, skj_n.csv,
 #         swo_f.csv, swo_n.csv,
 #         yft_f.csv, yft_n.csv (output)
 # After:  alb_f.csv, alb_n.csv,
 #         bet_f.csv, bet_n.csv,
+#         ocs_f.csv, ocs_n.csv,
 #         skj_f.csv, skj_n.csv,
 #         swo_f.csv, swo_n.csv,
 #         yft_f.csv, yft_n.csv (report)
@@ -20,6 +22,8 @@ alb.f <- read.taf("output/alb_f.csv")
 alb.n <- read.taf("output/alb_n.csv")
 bet.f <- read.taf("output/bet_f.csv")
 bet.n <- read.taf("output/bet_n.csv")
+ocs.f <- read.taf("output/ocs_f.csv")
+ocs.n <- read.taf("output/ocs_n.csv")
 skj.f <- read.taf("output/skj_f.csv")
 skj.n <- read.taf("output/skj_n.csv")
 swo.f <- read.taf("output/swo_f.csv")
@@ -38,6 +42,12 @@ bet.f$f <- round(bet.f$f, 2)
 bet.n$n <- round(bet.n$n)
 bet.f <- format(long2taf(bet.f))  # retain trailing zeros
 bet.n <- long2taf(bet.n)
+
+# Format OCS
+ocs.f$f <- round(ocs.f$f, 2)
+ocs.n$n <- round(ocs.n$n)
+ocs.f <- format(long2taf(ocs.f))  # retain trailing zeros
+ocs.n <- long2taf(ocs.n)
 
 # Format SKJ
 skj.f$f <- round(skj.f$f, 2)
@@ -62,6 +72,8 @@ write.taf(alb.f, dir="report")
 write.taf(alb.n, dir="report")
 write.taf(bet.f, dir="report")
 write.taf(bet.n, dir="report")
+write.taf(ocs.f, dir="report")
+write.taf(ocs.n, dir="report")
 write.taf(skj.f, dir="report")
 write.taf(skj.n, dir="report")
 write.taf(swo.f, dir="report")

@@ -40,6 +40,7 @@ names(ocs.f) <- c("sex", "year", "age", "f")
 names(ocs.n) <- c("sex", "year", "age", "n")
 names(swo.f) <- c("area", "sex", "year", "age", "f")
 names(swo.n) <- c("area", "sex", "year", "age", "n")
+# tables must be sorted for weighting algorithm
 ocs.f <- ocs.f[order(ocs.f$sex, ocs.f$age, ocs.f$year),]
 ocs.n <- ocs.n[order(ocs.n$sex, ocs.n$age, ocs.n$year),]
 swo.f <- swo.f[order(swo.f$area, swo.f$sex, swo.f$age, swo.f$year),]
