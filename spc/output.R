@@ -1,17 +1,9 @@
 # Extract results of interest, write CSV output tables
 
-# Before: alb_f.csv, alb_n.csv,
-#         bet_f.csv, bet_n.csv,
-#         ocs_f.csv, ocs_n.csv,
-#         skj_f.csv, skj_n.csv,
-#         swo_f.csv, swo_n.csv,
-#         yft_f.csv, yft_n.csv (model)
-# After:  alb_f.csv, alb_n.csv,
-#         bet_f.csv, bet_n.csv,
-#         ocs_f.csv, ocs_n.csv,
-#         skj_f.csv, skj_n.csv,
-#         swo_f.csv, swo_n.csv,
-#         yft_f.csv, yft_n.csv (output)
+# Before: alb_f.csv, alb_n.csv, bet_f.csv, bet_n.csv, ocs_f.csv, ocs_n.csv,
+#         skj_f.csv, skj_n.csv, yft_f.csv, yft_n.csv (model)
+# After:  alb_f.csv, alb_n.csv, bet_f.csv, bet_n.csv, ocs_f.csv, ocs_n.csv,
+#         skj_f.csv, skj_n.csv, yft_f.csv, yft_n.csv (output)
 
 library(TAF)
 

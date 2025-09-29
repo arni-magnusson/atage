@@ -1,17 +1,9 @@
 # Run analysis, write model results
 
-# Before: alb_f.csv, alb_n.csv,
-#         bet_f.csv, bet_n.csv,
-#         ocs_f.csv, ocs_n.csv,
-#         skj_f.csv, skj_n.csv,
-#         swo_f.csv, swo_n.csv,
-#         yft_f.csv, yft_n.csv (data)
-# After:  alb_f.csv, alb_n.csv,
-#         bet_f.csv, bet_n.csv,
-#         ocs_f.csv, ocs_n.csv,
-#         skj_f.csv, skj_n.csv,
-#         swo_f.csv, swo_n.csv,
-#         yft_f.csv, yft_n.csv (model)
+# Before: alb_f.csv, alb_n.csv, bet_f.csv, bet_n.csv, ocs_f.csv, ocs_n.csv,
+#         skj_f.csv, skj_n.csv, yft_f.csv, yft_n.csv (data)
+# After:  alb_f.csv, alb_n.csv, bet_f.csv, bet_n.csv, ocs_f.csv, ocs_n.csv,
+#         skj_f.csv, skj_n.csv, yft_f.csv, yft_n.csv (model)
 
 library(TAF)
 
@@ -26,8 +18,6 @@ ocs.f <- read.taf("data/ocs_f.csv")
 ocs.n <- read.taf("data/ocs_n.csv")
 skj.f <- read.taf("data/skj_f.csv")
 skj.n <- read.taf("data/skj_n.csv")
-swo.f <- read.taf("data/swo_f.csv")
-swo.n <- read.taf("data/swo_n.csv")
 yft.f <- read.taf("data/yft_f.csv")
 yft.n <- read.taf("data/yft_n.csv")
 
@@ -63,14 +53,6 @@ skj.n <- aggregate(n~year+age+season, skj.n, sum)  # sum areas and within age
 skj.n <- aggregate(n~year+age, skj.n, mean)  # avg across seasons
 skj.n$n <- skj.n$n / 1e6
 
-# Aggregate SWO
-# table must be sorted for weighting algorithm
-swo.n$w <- with(swo.n, ave(n, year, age, FUN=proportions))  # weights for avg F
-swo.f$fxw <- swo.f$f * swo.n$w  # apply weights
-swo.n <- aggregate(n~year+age, swo.n, sum)
-swo.f <- aggregate(fxw~year+age, swo.f, sum)
-names(swo.f)[names(swo.f) == "fxw"] <- "f"
-
 # Aggregate YFT
 yft.f$age <- ceiling(yft.f$age / 4)
 yft.f <- yft.f[yft.f$area == "all",]
@@ -89,7 +71,5 @@ write.taf(ocs.f, dir="model")
 write.taf(ocs.n, dir="model")
 write.taf(skj.f, dir="model")
 write.taf(skj.n, dir="model")
-write.taf(swo.f, dir="model")
-write.taf(swo.n, dir="model")
 write.taf(yft.f, dir="model")
 write.taf(yft.n, dir="model")

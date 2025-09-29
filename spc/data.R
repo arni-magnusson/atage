@@ -1,17 +1,10 @@
 # Prepare data, write CSV data tables
 
-# Before: alb/f_annual.csv, alb/natage.csv,
-#         bet/f_annual.csv, bet/natage.csv,
-#         ocs/f_annual.csv, ocs/natage.csv,
-#         skj/f_annual.csv, skj/natage.csv,
-#         swo/f_area.csv, swo/natage.csv,
+# Before: alb/f_annual.csv, alb/natage.csv, bet/f_annual.csv, bet/natage.csv,
+#         ocs/fishmort.csv, ocs/natage.csv, skj/f_annual.csv, skj/natage.csv,
 #         yft/f_annual.csv, yft/natage.csv (boot/data)
-# After:  alb_f.csv, alb_n.csv,
-#         bet_f.csv, bet_n.csv,
-#         ocs_f.csv, ocs_n.csv,
-#         skj_f.csv, skj_n.csv,
-#         swo_f.csv, swo_n.csv,
-#         yft_f.csv, yft_n.csv (data)
+# After:  alb_f.csv, alb_n.csv, bet_f.csv, bet_n.csv, ocs_f.csv, ocs_n.csv,
+#         skj_f.csv, skj_n.csv, yft_f.csv, yft_n.csv (data)
 
 library(TAF)
 
@@ -32,22 +25,14 @@ cp("boot/data/yft/natage.csv",   "data/yft_n.csv")
 # Read SS3 tables
 ocs.f <- read.taf("boot/data/ocs/fishmort.csv")
 ocs.n <- read.taf("boot/data/ocs/natage.csv")
-swo.f <- read.taf("boot/data/swo/f_area.csv")
-swo.n <- read.taf("boot/data/swo/natage.csv")
 
 # Format SS3 tables
 names(ocs.f) <- c("sex", "year", "age", "f")
 names(ocs.n) <- c("sex", "year", "age", "n")
-names(swo.f) <- c("area", "sex", "year", "age", "f")
-names(swo.n) <- c("area", "sex", "year", "age", "n")
 # tables must be sorted for weighting algorithm
 ocs.f <- ocs.f[order(ocs.f$sex, ocs.f$age, ocs.f$year),]
 ocs.n <- ocs.n[order(ocs.n$sex, ocs.n$age, ocs.n$year),]
-swo.f <- swo.f[order(swo.f$area, swo.f$sex, swo.f$age, swo.f$year),]
-swo.n <- swo.n[order(swo.n$area, swo.n$sex, swo.n$age, swo.n$year),]
 
 # Write SS3 tables
 write.taf(ocs.f, dir="data")
 write.taf(ocs.n, dir="data")
-write.taf(swo.f, dir="data")
-write.taf(swo.n, dir="data")

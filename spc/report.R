@@ -1,17 +1,9 @@
 # Produce plots and tables for report
 
-# Before: alb_f.csv, alb_n.csv,
-#         bet_f.csv, bet_n.csv,
-#         ocs_f.csv, ocs_n.csv,
-#         skj_f.csv, skj_n.csv,
-#         swo_f.csv, swo_n.csv,
-#         yft_f.csv, yft_n.csv (output)
-# After:  alb_f.csv, alb_n.csv,
-#         bet_f.csv, bet_n.csv,
-#         ocs_f.csv, ocs_n.csv,
-#         skj_f.csv, skj_n.csv,
-#         swo_f.csv, swo_n.csv,
-#         yft_f.csv, yft_n.csv (report)
+# Before: alb_f.csv, alb_n.csv, bet_f.csv, bet_n.csv, ocs_f.csv, ocs_n.csv,
+#         skj_f.csv, skj_n.csv, yft_f.csv, yft_n.csv (output)
+# After:  alb_f.csv, alb_n.csv, bet_f.csv, bet_n.csv, ocs_f.csv, ocs_n.csv,
+#         skj_f.csv, skj_n.csv, yft_f.csv, yft_n.csv (report)
 
 library(TAF)
 
@@ -26,8 +18,6 @@ ocs.f <- read.taf("output/ocs_f.csv")
 ocs.n <- read.taf("output/ocs_n.csv")
 skj.f <- read.taf("output/skj_f.csv")
 skj.n <- read.taf("output/skj_n.csv")
-swo.f <- read.taf("output/swo_f.csv")
-swo.n <- read.taf("output/swo_n.csv")
 yft.f <- read.taf("output/yft_f.csv")
 yft.n <- read.taf("output/yft_n.csv")
 
@@ -55,12 +45,6 @@ skj.n$n <- round(skj.n$n)
 skj.f <- format(long2taf(skj.f))  # retain trailing zeros
 skj.n <- long2taf(skj.n)
 
-# Format SWO
-swo.f$f <- round(swo.f$f, 2)
-swo.n$n <- round(swo.n$n)
-swo.f <- format(long2taf(swo.f))  # retain trailing zeros
-swo.n <- long2taf(swo.n)
-
 # Format YFT
 yft.f$f <- round(yft.f$f, 2)
 yft.n$n <- round(yft.n$n)
@@ -76,7 +60,5 @@ write.taf(ocs.f, dir="report")
 write.taf(ocs.n, dir="report")
 write.taf(skj.f, dir="report")
 write.taf(skj.n, dir="report")
-write.taf(swo.f, dir="report")
-write.taf(swo.n, dir="report")
 write.taf(yft.f, dir="report")
 write.taf(yft.n, dir="report")
