@@ -2,9 +2,11 @@
 
 # Before: alb_f.csv, alb_n.csv,
 #         bet_f.csv, bet_n.csv,
+#         skj_f.csv, skj_n.csv,
 #         yft_f.csv, yft_n.csv (data)
 # After:  alb_f.csv, alb_n.csv,
 #         bet_f.csv, bet_n.csv,
+#         skj_f.csv, skj_n.csv,
 #         yft_f.csv, yft_n.csv (model)
 
 library(TAF)
@@ -16,6 +18,8 @@ alb.f <- read.taf("data/alb_f.csv")
 alb.n <- read.taf("data/alb_n.csv")
 bet.f <- read.taf("data/bet_f.csv")
 bet.n <- read.taf("data/bet_n.csv")
+skj.f <- read.taf("data/skj_f.csv")
+skj.n <- read.taf("data/skj_n.csv")
 yft.f <- read.taf("data/yft_f.csv")
 yft.n <- read.taf("data/yft_n.csv")
 
@@ -34,6 +38,15 @@ bet.n <- aggregate(n~year+age+season, bet.n, sum)  # sum areas and within age
 bet.n <- aggregate(n~year+age, bet.n, mean)  # avg across seasons
 bet.n$n <- bet.n$n / 1e6
 
+# Aggregate SKJ
+skj.f$age <- ceiling(skj.f$age / 4)
+skj.f <- skj.f[skj.f$area == "all",]
+skj.f <- aggregate(f~year+age, skj.f, mean)  # avg within each age
+skj.n$age <- ceiling(skj.n$age / 4)
+skj.n <- aggregate(n~year+age+season, skj.n, sum)  # sum areas and within age
+skj.n <- aggregate(n~year+age, skj.n, mean)  # avg across seasons
+skj.n$n <- skj.n$n / 1e6
+
 # Aggregate YFT
 yft.f$age <- ceiling(yft.f$age / 4)
 yft.f <- yft.f[yft.f$area == "all",]
@@ -48,5 +61,7 @@ write.taf(alb.f, dir="model")
 write.taf(alb.n, dir="model")
 write.taf(bet.f, dir="model")
 write.taf(bet.n, dir="model")
+write.taf(skj.f, dir="model")
+write.taf(skj.n, dir="model")
 write.taf(yft.f, dir="model")
 write.taf(yft.n, dir="model")
