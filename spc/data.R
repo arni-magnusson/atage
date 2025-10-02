@@ -29,9 +29,6 @@ ocs.n <- read.taf("boot/data/ocs/natage.csv")
 # Format SS3 tables
 names(ocs.f) <- c("sex", "year", "age", "f")
 names(ocs.n) <- c("sex", "year", "age", "n")
-# tables must be sorted for weighting algorithm
-ocs.f <- ocs.f[order(ocs.f$sex, ocs.f$age, ocs.f$year),]
-ocs.n <- ocs.n[order(ocs.n$sex, ocs.n$age, ocs.n$year),]
 
 # Write SS3 tables
 write.taf(ocs.f, dir="data")

@@ -37,7 +37,9 @@ bet.n <- aggregate(n~year+age, bet.n, mean)  # avg across seasons
 bet.n$n <- bet.n$n / 1e6
 
 # Aggregate OCS
-# table must be sorted for weighting algorithm
+# sort tables before applying weighting algorithm
+ocs.f <- ocs.f[order(ocs.f$sex, ocs.f$age, ocs.f$year),]
+ocs.n <- ocs.n[order(ocs.n$sex, ocs.n$age, ocs.n$year),]
 ocs.n$w <- with(ocs.n, ave(n, year, age, FUN=proportions))  # weights for avg F
 ocs.f$fxw <- ocs.f$f * ocs.n$w  # apply weights
 ocs.n <- aggregate(n~year+age, ocs.n, sum)
